@@ -1,9 +1,10 @@
 import Navbar from "@/components/Navbar";
 import ResultsMap, { MOCK_RESULTS } from "@/components/ResultsMap";
 
-export default function SearchPage({ searchParams }: { searchParams?: { q?: string; loc?: string } }) {
-  const query = searchParams?.q || "";
-  const loc = searchParams?.loc || "Paris";
+export default async function SearchPage({ searchParams }: { searchParams: Promise<{ q?: string; loc?: string }> }) {
+  const params = await searchParams;
+  const query = params?.q || "";
+  const loc = params?.loc || "Paris";
 
   return (
     <div className="min-h-screen grid grid-rows-[auto_1fr] bg-[#e7f3ec]">
