@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
-import ResultsMap, { MOCK_RESULTS } from "@/components/ResultsMap";
+import ResultsMap from "@/components/ResultsMap";
+import { MOCK_RESULTS } from "@/lib/mockResults";
 
 export default async function SearchPage({ searchParams }: { searchParams: Promise<{ q?: string; loc?: string }> }) {
   const params = await searchParams;
