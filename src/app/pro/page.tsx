@@ -1,21 +1,11 @@
 import Image from "next/image";
-import Link from "next/link";
+import Navbar from "@/components/Navbar";
+import CountUp from "@/components/CountUp";
 
 export default function ProPage() {
   return (
     <div className="font-sans min-h-screen bg-[#e7f3ec]">
-      <header className="flex items-center justify-between max-w-[1200px] mx-auto px-6 py-6">
-        <div className="flex items-center gap-2">
-        <Image src="/logo.svg" alt="AlloVeto" width={100} height={100} />
-        </div>
-        <nav className="hidden md:flex items-center gap-10">
-          <Link className="text-[#0c7a5c] font-semibold" href="/pro">Accueil</Link>
-        </nav>
-        <div className="flex items-center gap-4">
-          <button className="h-11 px-5 rounded-full bg-[#0f8f70] text-white font-semibold">Se connecter</button>
-          <button className="h-11 px-5 rounded-full bg-white text-[#0f8f70] font-semibold">S’inscrire</button>
-        </div>
-      </header>
+      <Navbar />
 
       <main>
         {/* Hero */}
@@ -48,15 +38,15 @@ export default function ProPage() {
         <section className="px-6 -mt-6">
           <div className="max-w-[1200px] mx-auto bg-[#fbfcfa] rounded-xl shadow-sm border border-[#dfe8e3] grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-[#dfe8e3]">
             <div className="p-8 text-center">
-              <div className="text-[34px] font-extrabold text-[#102a23]">+3.500</div>
+              <CountUp end={3500} prefix="+" className="text-[34px] font-extrabold text-[#102a23]" />
               <div className="text-xs uppercase tracking-wide text-[#1a9c7b] mt-1">Vétérinaires conquis</div>
             </div>
             <div className="p-8 text-center">
-              <div className="text-[34px] font-extrabold text-[#102a23]">+15</div>
+              <CountUp end={15} prefix="+" className="text-[34px] font-extrabold text-[#102a23]" />
               <div className="text-xs uppercase tracking-wide text-[#1a9c7b] mt-1">Régions clientes</div>
             </div>
             <div className="p-8 text-center">
-              <div className="text-[34px] font-extrabold text-[#102a23]">+10</div>
+              <CountUp end={10} prefix="+" className="text-[34px] font-extrabold text-[#102a23]" />
               <div className="text-xs uppercase tracking-wide text-[#1a9c7b] mt-1">Années de service</div>
             </div>
           </div>
