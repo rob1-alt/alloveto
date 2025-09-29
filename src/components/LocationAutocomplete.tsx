@@ -51,8 +51,9 @@ export default function LocationAutocomplete({
         const res = await fetch(url.toString());
         if (!res.ok) return;
         const data = await res.json();
-        const items: Suggestion[] = (data?.features || [])
-          .map((f: any) => ({ id: f.properties.id as string, label: f.properties.label as string }))
+        type Feature = { properties: { id: string; label: string } };
+        const items: Suggestion[] = ((data?.features || []) as Feature[])
+          .map((f) => ({ id: f.properties.id, label: f.properties.label }))
           // Garder en priorité les libellés contenant "Arrondissement"
           .sort((a: Suggestion, b: Suggestion) => {
             const aa = /arrondissement/i.test(a.label) ? 0 : 1;
@@ -64,7 +65,7 @@ export default function LocationAutocomplete({
           setSuggestions(items);
           setOpen(true);
         }
-      } catch (_) {
+      } catch {
         // Ignorer si abort
       }
     }, 200);
