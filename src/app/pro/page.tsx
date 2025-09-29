@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ProPage() {
   return (
@@ -8,7 +9,7 @@ export default function ProPage() {
         <Image src="/logo.svg" alt="AlloVeto" width={100} height={100} />
         </div>
         <nav className="hidden md:flex items-center gap-10">
-          <a className="text-[#0c7a5c] font-semibold" href="/pro">Accueil</a>
+          <Link className="text-[#0c7a5c] font-semibold" href="/pro">Accueil</Link>
         </nav>
         <div className="flex items-center gap-4">
           <button className="h-11 px-5 rounded-full bg-[#0f8f70] text-white font-semibold">Se connecter</button>

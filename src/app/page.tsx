@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -8,8 +9,8 @@ export default function Home() {
           <Image src="/logo.svg" alt="AlloVeto" width={120} height={32} />
         </div>
         <nav className="hidden md:flex items-center gap-10">
-          <a className="text-[#0c7a5c] font-semibold" href="/">Accueil</a>
-          <a className="text-[#0c7a5c] font-semibold" href="/pro">Professionnels</a>
+          <Link className="text-[#0c7a5c] font-semibold" href="/">Accueil</Link>
+          <Link className="text-[#0c7a5c] font-semibold" href="/pro">Professionnels</Link>
         </nav>
         <div className="flex items-center gap-4">
           <button className="h-11 px-5 rounded-full bg-[#0f8f70] text-white font-semibold">Se connecter</button>
@@ -18,9 +19,9 @@ export default function Home() {
       </header>
 
       <main className="max-w-[1200px] mx-auto px-6 py-24">
-        <a href="/pro" className="text-[#0f8f70] underline font-semibold">
+        <Link href="/pro" className="text-[#0f8f70] underline font-semibold">
           Accéder à la page professionnelle →
-        </a>
+        </Link>
       </main>
     </div>
   );
