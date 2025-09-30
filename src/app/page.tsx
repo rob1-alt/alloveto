@@ -2,6 +2,7 @@ import LocationAutocomplete from "@/components/LocationAutocomplete";
 import Navbar from "@/components/Navbar";
 import ChatWidget from "@/components/ChatWidget";
 import CountUp from "@/components/CountUp";
+import { QUERY_SUGGESTIONS } from "@/lib/querySuggestions";
 
 export default function Home() {
   return (
@@ -21,7 +22,7 @@ export default function Home() {
           <form action="/recherche" method="get" className="flex items-stretch w-full max-w-[1100px]">
             <div className="w-full bg-white rounded-full shadow-sm border border-[#dfe8e3] overflow-visible flex">
               {/* Query */}
-              <label className="flex items-center gap-3 px-5 h-[64px] flex-1">
+              <label className="flex items-center gap-3 px-5 h-[64px] flex-1 relative">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden className="text-[#0f8f70]">
                   <path d="M11 19a8 8 0 1 1 5.292-13.999A8 8 0 0 1 11 19Zm10 2-5.1-5.1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -30,7 +31,14 @@ export default function Home() {
                   className="outline-none w-full placeholder:text-[#617671] text-black"
                   placeholder="Nom, spécialité, établissement,…"
                   name="q"
+                  list="query-suggestions"
                 />
+                {/* Simple suggestion dropdown (clientless) */}
+                <datalist id="query-suggestions">
+                  {QUERY_SUGGESTIONS.map((s) => (
+                    <option key={s} value={s} />
+                  ))}
+                </datalist>
               </label>
               <div className="w-px bg-[#dfe8e3] my-3" />
               {/* Location */}

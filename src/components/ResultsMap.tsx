@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { MapContainer, Popup, TileLayer, CircleMarker, Circle, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { PARIS_CENTER, MOCK_RESULTS } from "@/lib/mockResults";
+import { PARIS_CENTER } from "@/lib/mockResults";
+import { parseVetsMarkdown, arrondissementFromAddress } from "@/lib/chatUtils";
 
 // Ensure Leaflet default marker icons work if used elsewhere
 if (typeof window !== "undefined") {
@@ -32,7 +33,33 @@ type ResultsMapProps = {
 
 export default function ResultsMap({ query: _query, loc: _loc }: ResultsMapProps) {
   const center = PARIS_CENTER;
-  const markers = useMemo(() => MOCK_RESULTS, []);
+  const [markers, setMarkers] = useState<{ id: string; name: string; position: [number, number]; address: string }[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("/veto-cabinet.md");
+        if (!res.ok) return;
+        const md = await res.text();
+        const vets = parseVetsMarkdown(md);
+        const in15 = vets.filter((v) => arrondissementFromAddress(v.address) === 15);
+        const parsed = in15
+          .map((v, idx) => {
+            const coords = extractLatLngFromMapsUrl(v.mapsUrl);
+            if (!coords) return null;
+            return { id: String(idx), name: v.name, position: coords, address: v.address } as const;
+          })
+          .filter(Boolean) as { id: string; name: string; position: [number, number]; address: string }[];
+        if (!cancelled) setMarkers(parsed);
+      } catch {
+        // ignore
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <MapContainer center={center} zoom={13} style={{ height: "100%", width: "100%" }} scrollWheelZoom={true}>
@@ -40,7 +67,7 @@ export default function ResultsMap({ query: _query, loc: _loc }: ResultsMapProps
         attribution='&copy; OpenStreetMap, © <a href="https://carto.com/attributions">CARTO</a>'
         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
       />
-      <Circle center={center} radius={3000} pathOptions={{ color: "#0f8f70", weight: 1, fillColor: "#0f8f70", fillOpacity: 0.08 }} />
+      <Circle center={center} radius={2000} pathOptions={{ color: "#0f8f70", weight: 1, fillColor: "#0f8f70", fillOpacity: 0.08 }} />
       {markers.map((m) => (
         <CircleMarker
           key={m.id}
@@ -75,10 +102,26 @@ function FitToMarkers({ items }: { items: { position: [number, number] }[] }) {
   useEffect(() => {
     if (!items || items.length === 0) return;
     const bounds = L.latLngBounds(items.map((i) => L.latLng(i.position[0], i.position[1])));
-    map.fitBounds(bounds, { padding: [30, 30], maxZoom: 14, animate: true });
+    map.fitBounds(bounds, { padding: [30, 30], maxZoom: 15, animate: true });
     L.control.scale({ metric: true, imperial: false, position: "bottomleft" }).addTo(map);
   }, [items, map]);
   return null;
+}
+
+
+function extractLatLngFromMapsUrl(url: string): [number, number] | null {
+  try {
+    const u = new URL(url);
+    const q = u.searchParams.get("query");
+    if (!q) return null;
+    const [latStr, lngStr] = decodeURIComponent(q).split(",");
+    const lat = parseFloat(latStr);
+    const lng = parseFloat(lngStr);
+    if (Number.isFinite(lat) && Number.isFinite(lng)) return [lat, lng];
+    return null;
+  } catch {
+    return null;
+  }
 }
 
 
