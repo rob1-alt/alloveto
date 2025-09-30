@@ -1,3 +1,25 @@
+## Chatbot DeepInfra (Agent)
+
+Ajout d'un chatbot propulsé par DeepInfra via une route API Next.js.
+
+### Configuration
+
+1. Créez une clé API sur DeepInfra et définissez les variables d'environnement suivantes (par exemple dans un fichier `.env.local` à la racine):
+
+```
+DEEPINFRA_API_KEY=your_deepinfra_api_key
+DEEPINFRA_MODEL=mistralai/Mistral-Small-24B-Instruct-2501
+```
+
+2. Redémarrez le serveur de dev.
+
+### Utilisation
+
+- API: `POST /api/chat` avec un corps JSON contenant `messages: { role, content }[]` (compatible OpenAI).
+- UI: page `~/src/app/chat/page.tsx` accessible via l'URL `/chat` et le lien "Chat" dans la barre de navigation.
+
+Le modèle par défaut est `meta-llama/Meta-Llama-3.1-8B-Instruct`. Vous pouvez passer `model` dans le body pour le changer.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
