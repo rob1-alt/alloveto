@@ -247,6 +247,16 @@ export default function ChatPage() {
 		const arrFromUser = extractArrondissementNumber(trimmed);
 		let appendedCard = false;
 
+		// If explicitly 16e, immediately append 3 default cards (guaranteed)
+		if (arrFromUser === 16) {
+			const cards = getDefault16eCards(vetIndex || []);
+			setMessages((prev) => [
+				...prev,
+				{ role: "assistant", content: "", vetCards: cards },
+			]);
+			appendedCard = true;
+		}
+
 		// If arrondissement requested but index not ready, load it once and then try to show a card
 		if (arrFromUser && (!vetIndex || vetIndex.length === 0)) {
 			try {

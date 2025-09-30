@@ -49,6 +49,11 @@ export default function ChatWidget() {
 
     const arr = extractArrondissementNumber(trimmed);
     let appendedCard = false;
+    if (arr === 16) {
+      const cards = getDefault16eCards(vetIndex || []);
+      setMessages((prev) => [...prev, { role: "assistant", content: "", vetCards: cards }]);
+      appendedCard = true;
+    }
     // Ensure vet index is loaded if arrondissement is requested
     if (arr && (!vetIndex || vetIndex.length === 0)) {
       try {
@@ -188,10 +193,6 @@ export default function ChatWidget() {
                 <div className="mb-3">
                   <div className="text-left text-xs text-gray-500 mb-1">Kimmi</div>
                   <div className="flex items-start gap-3">
-                    <div className="shrink-0">
-                <Image src="/dog-agent.png" alt="Bot" width={44} height={44} className="rounded-full bg-white p-1 border" />
-                      <Image src="/dog-agent.png" alt="Bot" width={44} height={44} className="rounded-full bg-white p-1 border" />
-                    </div>
                     <div className="flex-1">
                       <div className="bg-[#e6f4f1] text-[#0f8f70] p-3 rounded-lg max-w-[85%]">
                         Kimmi est en train d&#39;écrire…
