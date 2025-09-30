@@ -4,7 +4,7 @@ import { useEffect, useMemo } from "react";
 import { MapContainer, Popup, TileLayer, CircleMarker, Circle, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { PARIS_CENTER, MOCK_RESULTS, Result } from "@/lib/mockResults";
+import { PARIS_CENTER, MOCK_RESULTS } from "@/lib/mockResults";
 
 // Ensure Leaflet default marker icons work if used elsewhere
 if (typeof window !== "undefined") {
@@ -30,7 +30,7 @@ type ResultsMapProps = {
   loc: string; // currently unused, kept for future geocoding
 };
 
-export default function ResultsMap({ query, loc }: ResultsMapProps) {
+export default function ResultsMap({ query: _query, loc: _loc }: ResultsMapProps) {
   const center = PARIS_CENTER;
   const markers = useMemo(() => MOCK_RESULTS, []);
 

@@ -165,7 +165,7 @@ export default function ChatPage() {
 					{ role: "assistant", content: "Désolé, je n'ai pas pu générer de réponse." },
 				]);
 			}
-		} catch (e) {
+		} catch {
 			setMessages((prev) => [
 				...prev,
 				{ role: "assistant", content: "Erreur lors de l'appel à l'API." },
@@ -252,7 +252,7 @@ export default function ChatPage() {
 										</div>
 										<div className="flex-1">
 											<div className="bg-[#e6f4f1] text-[#0f8f70] p-3 rounded-lg max-w-[80%]">
-												Kimmi est en train d'écrire…
+												Kimmi est en train d&#39;écrire…
 											</div>
 										</div>
 									</div>
