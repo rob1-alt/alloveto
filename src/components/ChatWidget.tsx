@@ -167,6 +167,21 @@ export default function ChatWidget() {
                   })()}
                 </div>
               ))}
+              {isLoading && (
+                <div className="mb-3">
+                  <div className="text-left text-xs text-gray-500 mb-1">Kimmi</div>
+                  <div className="flex items-start gap-3">
+                    <div className="shrink-0">
+                      <Image src="/dog-agent.png" alt="Bot" width={36} height={36} className="rounded-full bg-white p-1 border" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="bg-[#e6f4f1] text-[#0f8f70] p-3 rounded-lg max-w-[85%]">
+                        Kimmi est en train d&#39;écrire…
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
               <div ref={endRef} />
             </div>
 

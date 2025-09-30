@@ -14,6 +14,7 @@ export default function Navbar({ className }: NavbarProps) {
       <nav className="hidden md:flex items-center gap-10">
         <Link className="text-[#0c7a5c] font-semibold" href="/">Accueil</Link>
         <Link className="text-[#0c7a5c] font-semibold" href="/pro">Professionnels</Link>
+        <Link className="text-[#0c7a5c] font-semibold" href="/veterinaires">Vétérinaires</Link>
         <Link className="text-[#0c7a5c] font-semibold" href="/chat">Chat</Link>
       </nav>
       <div className="flex items-center gap-4">
