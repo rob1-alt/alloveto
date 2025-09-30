@@ -1,6 +1,7 @@
 import LocationAutocomplete from "@/components/LocationAutocomplete";
 import Navbar from "@/components/Navbar";
 import ChatWidget from "@/components/ChatWidget";
+import CountUp from "@/components/CountUp";
 
 export default function Home() {
   return (
@@ -54,50 +55,57 @@ export default function Home() {
         <section className="mt-14 w-full">
           <div className="grid grid-cols-1 sm:grid-cols-3 bg-white border border-[#dfe8e3] rounded-2xl overflow-hidden text-center">
             <div className="p-6">
-              <div className="text-[32px] font-extrabold text-[#102a23]">+15.000</div>
+              <div className="text-[32px] font-extrabold text-[#102a23]"><CountUp end={15000} prefix="+" /></div>
               <div className="text-[#0f8f70] text-sm">clients satisfaits</div>
             </div>
             <div className="p-6 border-t sm:border-t-0 sm:border-l border-[#dfe8e3]">
-              <div className="text-[32px] font-extrabold text-[#102a23]">+50</div>
+              <div className="text-[32px] font-extrabold text-[#102a23]"><CountUp end={50} prefix="+" /></div>
               <div className="text-[#0f8f70] text-sm">cliniques partenaires</div>
             </div>
             <div className="p-6 border-t sm:border-t-0 sm:border-l border-[#dfe8e3]">
-              <div className="text-[32px] font-extrabold text-[#102a23]">+10</div>
+              <div className="text-[32px] font-extrabold text-[#102a23]"><CountUp end={10} prefix="+" /></div>
               <div className="text-[#0f8f70] text-sm">ans de soins et services</div>
             </div>
           </div>
         </section>
 
         {/* Services */}
-        <section className="mt-16 w-full">
-          <div className="text-center mb-6">
-            <div className="text-[#0f8f70] font-semibold">Services</div>
-            <h2 className="text-[26px] md:text-[32px] font-extrabold text-[#102a23]">Quels sont les avantages ?</h2>
+
+
+        <section className="max-w-[1200px] mx-auto px-6 py-16">
+          <div className="text-center mb-10">
+            <div className="text-[#1a9c7b] font-semibold">Services</div>
+            <h2 className="text-2xl md:text-3xl font-extrabold text-[#102a23] mt-2">
+              Quels sont les avantages ?
+            </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white border border-[#dfe8e3] rounded-xl p-6">
-              <div className="flex items-center gap-2 text-[#0f8f70] font-semibold mb-2">
-                <span className="inline-block w-5 h-5 rounded-full bg-[#0f8f70] text-white text-xs flex items-center justify-center">✓</span>
-                Prise de RDV plus rapide
-              </div>
-              <p className="text-[#617671] text-sm">Prenez rendez‑vous avec votre vétérinaire le plus proche en 1 clic.</p>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-white rounded-xl border border-[#dfe8e3] p-6">
+              <div className="w-8 h-8 rounded-full bg-[#e7f3ec] flex items-center justify-center text-[#0f8f70] mb-4">✓</div>
+              <h3 className="font-bold text-[#102a23] mb-2">Gain de temps dans la recherche</h3>
+              <p className="text-[#304640] text-sm">
+                Trouvez au plus vite la clinique ou le vétérinaire qui correspond à vos besoins.
+              </p>
             </div>
-            <div className="bg-white border border-[#dfe8e3] rounded-xl p-6">
-              <div className="flex items-center gap-2 text-[#0f8f70] font-semibold mb-2">
-                <span className="inline-block w-5 h-5 rounded-full bg-[#0f8f70] text-white text-xs flex items-center justify-center">✓</span>
-                Mieux préparer son RDV
-              </div>
-              <p className="text-[#617671] text-sm">Sélectionnez à l’avance tous les services dont votre animal a besoin lors du RDV.</p>
+            <div className="bg-white rounded-xl border border-[#dfe8e3] p-6">
+              <div className="w-8 h-8 rounded-full bg-[#e7f3ec] flex items-center justify-center text-[#0f8f70] mb-4">✓</div>
+              <h3 className="font-bold text-[#102a23] mb-2">Prise de rendez-vous en un clic</h3>
+              <p className="text-[#304640] text-sm">
+                Prenez rendez-vous avec votre vétérinaire le plus proche en 1 clic.
+                Sélectionnez à l’avance tous les services dont votre animal a besoin lors du RDV.
+              </p>
             </div>
-            <div className="bg-white border border-[#dfe8e3] rounded-xl p-6">
-              <div className="flex items-center gap-2 text-[#0f8f70] font-semibold mb-2">
-                <span className="inline-block w-5 h-5 rounded-full bg-[#0f8f70] text-white text-xs flex items-center justify-center">✓</span>
-                Suivi optimisé des animaux
-              </div>
-              <p className="text-[#617671] text-sm">Gardez une vision claire de l’historique médical pour des soins plus adaptés.</p>
+            <div className="bg-white rounded-xl border border-[#dfe8e3] p-6">
+              <div className="w-8 h-8 rounded-full bg-[#e7f3ec] flex items-center justify-center text-[#0f8f70] mb-4">✓</div>
+              <h3 className="font-bold text-[#102a23] mb-2">Suivi médical de votre animal</h3>
+              <p className="text-[#304640] text-sm">
+                Gardez une vision claire de l’historique médical et améliorez la qualité du soin.
+              </p>
             </div>
           </div>
         </section>
+
 
         {/* Contact */}
         <section className="mt-20 grid grid-cols-1 md:grid-cols-[1fr_380px] items-center gap-10">

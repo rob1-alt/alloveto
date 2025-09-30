@@ -129,7 +129,7 @@ export default function ChatWidget() {
         onClick={() => setOpen(true)}
         className="fixed bottom-5 right-5 w-14 h-14 rounded-full bg-[#0f8f70] text-white shadow-lg flex items-center justify-center z-50"
       >
-        <Image src="/dog-agent.png" alt="Chatbot" width={28} height={28} className="rounded-full bg-white p-1" />
+        <Image src="/dog-agent.png" alt="Chatbot" width={56} height={56} className="rounded-full flex items-center justify-center" />
       </button>
 
       {open && (
@@ -189,7 +189,8 @@ export default function ChatWidget() {
                   <div className="text-left text-xs text-gray-500 mb-1">Kimmi</div>
                   <div className="flex items-start gap-3">
                     <div className="shrink-0">
-                      <Image src="/dog-agent.png" alt="Bot" width={36} height={36} className="rounded-full bg-white p-1 border" />
+                <Image src="/dog-agent.png" alt="Bot" width={44} height={44} className="rounded-full bg-white p-1 border" />
+                      <Image src="/dog-agent.png" alt="Bot" width={44} height={44} className="rounded-full bg-white p-1 border" />
                     </div>
                     <div className="flex-1">
                       <div className="bg-[#e6f4f1] text-[#0f8f70] p-3 rounded-lg max-w-[85%]">
