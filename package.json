@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "fetch:vets": "node scripts/fetch_vets.mjs"
   },
   "dependencies": {
     "@types/leaflet": "1.9.20",

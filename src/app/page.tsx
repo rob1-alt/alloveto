@@ -1,5 +1,6 @@
 import LocationAutocomplete from "@/components/LocationAutocomplete";
 import Navbar from "@/components/Navbar";
+import ChatWidget from "@/components/ChatWidget";
 
 export default function Home() {
   return (
@@ -49,6 +50,7 @@ export default function Home() {
           </form>
         </div>
       </main>
+      <ChatWidget />
     </div>
   );
 }

@@ -51,6 +51,17 @@ export default function ResultsMap({ query: _query, loc: _loc }: ResultsMapProps
           <Popup>
             <div className="font-semibold">{m.name}</div>
             <div className="text-sm">{m.address}</div>
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${m.position[0]},${m.position[1]}`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-flex items-center gap-2 text-[#0f8f70] text-sm font-medium"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <path d="M12 22s7-6.16 7-12a7 7 0 1 0-14 0c0 5.84 7 12 7 12Zm0-9a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" fill="currentColor"/>
+              </svg>
+              Ouvrir dans Google Maps
+            </a>
           </Popup>
         </CircleMarker>
       ))}

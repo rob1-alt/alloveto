@@ -18,9 +18,22 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
         <aside className="bg-white rounded-2xl border border-[#dfe8e3] p-4 overflow-auto max-h-[70vh]">
           <ul className="space-y-3">
             {MOCK_RESULTS.map((m) => (
-              <li key={m.id} className="p-3 rounded-xl border border-[#e6eee9] hover:bg-[#f7fbf9]">
-                <div className="font-semibold text-[#102a23]">{m.name}</div>
-                <div className="text-sm text-[#60756f]">{m.address}</div>
+              <li key={m.id} className="rounded-xl border border-[#e6eee9] hover:bg-[#f7fbf9]">
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${m.position[0]},${m.position[1]}`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block p-3 focus:outline-none focus:ring-2 focus:ring-[#0f8f70] rounded-xl"
+                >
+                  <div className="font-semibold text-[#102a23]">{m.name}</div>
+                  <div className="text-sm text-[#60756f]">{m.address}</div>
+                  <div className="mt-2 inline-flex items-center gap-2 text-[#0f8f70] text-sm font-medium">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+                      <path d="M12 22s7-6.16 7-12a7 7 0 1 0-14 0c0 5.84 7 12 7 12Zm0-9a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" fill="currentColor"/>
+                    </svg>
+                    Voir sur Google Maps
+                  </div>
+                </a>
               </li>
             ))}
           </ul>

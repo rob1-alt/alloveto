@@ -56,3 +56,14 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Scripts utiles
+
+- `fetch:vets`: Récupère les cabinets vétérinaires à Paris via Google Places API et écrit vers `public/veto-cabinet.md`.
+
+### Récupération des cabinets vétérinaires
+
+1. Activez l'API Places et créez une clé Google.
+2. Exportez la clé dans votre shell: `export GOOGLE_MAPS_API_KEY=VOTRE_CLE`.
+3. Exécutez: `npm run fetch:vets`.
+4. Le fichier est généré à `public/veto-cabinet.md`.
