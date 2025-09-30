@@ -49,6 +49,76 @@ export default function Home() {
             </button>
           </form>
         </div>
+
+        {/* Stats */}
+        <section className="mt-14 w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-3 bg-white border border-[#dfe8e3] rounded-2xl overflow-hidden text-center">
+            <div className="p-6">
+              <div className="text-[32px] font-extrabold text-[#102a23]">+15.000</div>
+              <div className="text-[#0f8f70] text-sm">clients satisfaits</div>
+            </div>
+            <div className="p-6 border-t sm:border-t-0 sm:border-l border-[#dfe8e3]">
+              <div className="text-[32px] font-extrabold text-[#102a23]">+50</div>
+              <div className="text-[#0f8f70] text-sm">cliniques partenaires</div>
+            </div>
+            <div className="p-6 border-t sm:border-t-0 sm:border-l border-[#dfe8e3]">
+              <div className="text-[32px] font-extrabold text-[#102a23]">+10</div>
+              <div className="text-[#0f8f70] text-sm">ans de soins et services</div>
+            </div>
+          </div>
+        </section>
+
+        {/* Services */}
+        <section className="mt-16 w-full">
+          <div className="text-center mb-6">
+            <div className="text-[#0f8f70] font-semibold">Services</div>
+            <h2 className="text-[26px] md:text-[32px] font-extrabold text-[#102a23]">Quels sont les avantages ?</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white border border-[#dfe8e3] rounded-xl p-6">
+              <div className="flex items-center gap-2 text-[#0f8f70] font-semibold mb-2">
+                <span className="inline-block w-5 h-5 rounded-full bg-[#0f8f70] text-white text-xs flex items-center justify-center">✓</span>
+                Prise de RDV plus rapide
+              </div>
+              <p className="text-[#617671] text-sm">Prenez rendez‑vous avec votre vétérinaire le plus proche en 1 clic.</p>
+            </div>
+            <div className="bg-white border border-[#dfe8e3] rounded-xl p-6">
+              <div className="flex items-center gap-2 text-[#0f8f70] font-semibold mb-2">
+                <span className="inline-block w-5 h-5 rounded-full bg-[#0f8f70] text-white text-xs flex items-center justify-center">✓</span>
+                Mieux préparer son RDV
+              </div>
+              <p className="text-[#617671] text-sm">Sélectionnez à l’avance tous les services dont votre animal a besoin lors du RDV.</p>
+            </div>
+            <div className="bg-white border border-[#dfe8e3] rounded-xl p-6">
+              <div className="flex items-center gap-2 text-[#0f8f70] font-semibold mb-2">
+                <span className="inline-block w-5 h-5 rounded-full bg-[#0f8f70] text-white text-xs flex items-center justify-center">✓</span>
+                Suivi optimisé des animaux
+              </div>
+              <p className="text-[#617671] text-sm">Gardez une vision claire de l’historique médical pour des soins plus adaptés.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact */}
+        <section className="mt-20 grid grid-cols-1 md:grid-cols-[1fr_380px] items-center gap-10">
+          <div>
+            <h3 className="text-[26px] font-extrabold text-[#102a23] mb-4">Rentrons en contact</h3>
+            <ul className="space-y-3 text-[#102a23]">
+              <li className="flex items-center gap-3">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden className="text-[#0f8f70]"><path d="M12 22s7-6.16 7-12a7 7 0 1 0-14 0c0 5.84 7 12 7 12Zm0-9a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" fill="currentColor"/></svg>
+                6 Rue Parmentier, 75011 Paris
+              </li>
+              <li className="flex items-center gap-3">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden className="text-[#0f8f70]"><path d="M4 4h16v16H4z" fill="currentColor"/></svg>
+                contact@alloveto.com
+              </li>
+            </ul>
+            <a href="mailto:contact@alloveto.com" className="inline-block mt-5 h-11 px-6 rounded-full bg-[#0f8f70] text-white font-semibold">Nous contacter</a>
+          </div>
+          <div className="rounded-[28px] overflow-hidden border border-[#dfe8e3] bg-white">
+            <img src="/herobanner.png" alt="Chat et propriétaire" className="w-full h-auto" />
+          </div>
+        </section>
       </main>
       <ChatWidget />
     </div>

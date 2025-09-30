@@ -48,6 +48,7 @@ export default function ChatWidget() {
     setInput("");
 
     const arr = extractArrondissementNumber(trimmed);
+    let appendedCard = false;
     // Ensure vet index is loaded if arrondissement is requested
     if (arr && (!vetIndex || vetIndex.length === 0)) {
       try {
@@ -61,7 +62,10 @@ export default function ChatWidget() {
     }
     if (arr && vetIndex && vetIndex.length > 0) {
       const match = pickVetForArrondissement(vetIndex, arr);
-      if (match) setMessages((prev) => [...prev, { role: "assistant", content: "", vetCards: [match] }]);
+      if (match) {
+        setMessages((prev) => [...prev, { role: "assistant", content: "", vetCards: [match] }]);
+        appendedCard = true;
+      }
     }
 
     try {
@@ -80,7 +84,7 @@ export default function ChatWidget() {
         if (cleaned) setMessages((prev) => [...prev, { role: "assistant", content: cleaned }]);
         const list = cards.length > 0 ? cards : mapCards;
         if (list.length > 0) setMessages((prev) => [...prev, { role: "assistant", content: "", vetCards: list }]);
-        if (arr) {
+        if (arr && !appendedCard) {
           const list = vetIndex || [];
           if (list.length > 0) {
             const match = pickVetForArrondissement(list, arr);
@@ -93,6 +97,11 @@ export default function ChatWidget() {
     } catch {
       setMessages((prev) => [...prev, { role: "assistant", content: "Erreur lors de l'appel à l'API." }]);
     } finally {
+      if (arr && !appendedCard) {
+        const list = vetIndex || [];
+        const match = list.length > 0 ? pickVetForArrondissement(list, arr) : null;
+        if (match) setMessages((prev) => [...prev, { role: "assistant", content: "", vetCards: [match] }]);
+      }
       setIsLoading(false);
     }
   }

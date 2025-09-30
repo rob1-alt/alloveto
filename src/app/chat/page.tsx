@@ -244,6 +244,7 @@ export default function ChatPage() {
 
 		// Pre-extract arrondissement from user's message to optionally add a card
 		const arrFromUser = extractArrondissementNumber(trimmed);
+		let appendedCard = false;
 
 		// If arrondissement requested but index not ready, load it once and then try to show a card
 		if (arrFromUser && (!vetIndex || vetIndex.length === 0)) {
@@ -254,12 +255,18 @@ export default function ChatPage() {
 					const parsed = parseVetsMarkdown(md);
 					setVetIndex(parsed);
 					const match = pickVetForArrondissement(parsed, arrFromUser);
-					if (match) setMessages((prev) => [...prev, { role: "assistant", content: "", vetCards: [match] }]);
+					if (match) {
+						setMessages((prev) => [...prev, { role: "assistant", content: "", vetCards: [match] }]);
+						appendedCard = true;
+					}
 				}
 			} catch {}
 		} else if (arrFromUser && vetIndex && vetIndex.length > 0) {
 			const match = pickVetForArrondissement(vetIndex, arrFromUser);
-			if (match) setMessages((prev) => [...prev, { role: "assistant", content: "", vetCards: [match] }]);
+			if (match) {
+				setMessages((prev) => [...prev, { role: "assistant", content: "", vetCards: [match] }]);
+				appendedCard = true;
+			}
 		}
 
 		try {
@@ -291,13 +298,14 @@ export default function ChatPage() {
 				}
 
 				// If user specified an arrondissement, try to append a matching vet card from our index
-				if (arrFromUser && vetIndex && vetIndex.length > 0) {
+				if (arrFromUser && vetIndex && vetIndex.length > 0 && !appendedCard) {
 					const match = pickVetForArrondissement(vetIndex, arrFromUser);
 					if (match) {
 						setMessages((prev) => [
 							...prev,
 							{ role: "assistant", content: "", vetCards: [match] },
 						]);
+						appendedCard = true;
 					}
 				}
 			} else {
@@ -312,6 +320,14 @@ export default function ChatPage() {
 				{ role: "assistant", content: "Erreur lors de l'appel à l'API." },
 			]);
 		} finally {
+			// Last-resort fallback: ensure a card is appended if arrondissement detected
+			if (arrFromUser && !appendedCard) {
+				const list = vetIndex || [];
+				const match = list.length > 0 ? pickVetForArrondissement(list, arrFromUser) : null;
+				if (match) {
+					setMessages((prev) => [...prev, { role: "assistant", content: "", vetCards: [match] }]);
+				}
+			}
 			setIsLoading(false);
 		}
 	}
