@@ -27,6 +27,15 @@ export async function POST(req: Request) {
 			);
 		}
 
+
+		const systemInstruction: ChatMessage = {
+			role: "system",
+			content:
+				"Tu es un assistant AlloVeto. Si l'utilisateur cherche un vétérinaire pour un problème pour son animal, réponds brièvement et propose ensuite 3-5 adresses de vétérinaires à Paris sous forme de cartes. Pour les cartes, ajoute à la fin du message un bloc <VET_CARDS>[{\"name\":\"Nom\",\"address\":\"Adresse\",\"mapsUrl\":\"https://maps.google.com/?q=...\",\"bookingUrl\":\"https://...\"}]</VET_CARDS>. Ne produis pas d'autre JSON en dehors de ce bloc. Sinon, réponds normalement.",
+		};
+
+		const outgoingMessages: ChatMessage[] = [systemInstruction, ...messages];
+
 		const deepinfraResponse = await fetch(
 			"https://api.deepinfra.com/v1/openai/chat/completions",
 			{
@@ -37,7 +46,7 @@ export async function POST(req: Request) {
 				},
 				body: JSON.stringify({
 					model: model || DEFAULT_MODEL,
-					messages,
+					messages: outgoingMessages,
 					stream: false,
 				}),
 			}
