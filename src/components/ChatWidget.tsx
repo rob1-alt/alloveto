@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { extractArrondissementNumber, parseVetsMarkdown, pickVetForArrondissement, extractVetCards, extractMapsFromText, stripMapsLinks, toEmbedUrl } from "@/lib/chatUtils";
+import { extractArrondissementNumber, parseVetsMarkdown, pickVetForArrondissement, extractVetCards, extractMapsFromText, stripMapsLinks, toEmbedUrl, getDefault16eCards } from "@/lib/chatUtils";
 
 type ChatMessage = {
   role: "system" | "user" | "assistant" | "tool";
@@ -86,7 +86,10 @@ export default function ChatWidget() {
         if (list.length > 0) setMessages((prev) => [...prev, { role: "assistant", content: "", vetCards: list }]);
         if (arr && !appendedCard) {
           const list = vetIndex || [];
-          if (list.length > 0) {
+          if (arr === 16) {
+            const cards = getDefault16eCards(list);
+            setMessages((prev) => [...prev, { role: "assistant", content: "", vetCards: cards }]);
+          } else if (list.length > 0) {
             const match = pickVetForArrondissement(list, arr);
             if (match) setMessages((prev) => [...prev, { role: "assistant", content: "", vetCards: [match] }]);
           }
@@ -99,8 +102,13 @@ export default function ChatWidget() {
     } finally {
       if (arr && !appendedCard) {
         const list = vetIndex || [];
-        const match = list.length > 0 ? pickVetForArrondissement(list, arr) : null;
-        if (match) setMessages((prev) => [...prev, { role: "assistant", content: "", vetCards: [match] }]);
+        if (arr === 16) {
+          const cards = getDefault16eCards(list);
+          setMessages((prev) => [...prev, { role: "assistant", content: "", vetCards: cards }]);
+        } else {
+          const match = list.length > 0 ? pickVetForArrondissement(list, arr) : null;
+          if (match) setMessages((prev) => [...prev, { role: "assistant", content: "", vetCards: [match] }]);
+        }
       }
       setIsLoading(false);
     }

@@ -167,4 +167,32 @@ export function toEmbedUrl(mapsUrl: string): string {
   }
 }
 
+// Hardcoded default cards for Paris 16e to always show when requested
+export const HARDCODED_16E_FALLBACK: VetCard[] = [
+  {
+    name: "Les Vétos Parisiens – Rue de la Pompe",
+    address: "145 Rue de la Pompe, 75116 Paris",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=48.8683843%2C2.2813384",
+  },
+  {
+    name: "Cabinet vétérinaire – Victor Hugo",
+    address: "Av. Victor Hugo, 75116 Paris",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=V%C3%A9t%C3%A9rinaire+75016+Victor+Hugo",
+  },
+  {
+    name: "Clinique vétérinaire – Passy / La Muette",
+    address: "Quartier Passy, 75116 Paris",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=V%C3%A9t%C3%A9rinaire+Passy+75016",
+  },
+];
+
+export function getDefault16eCards(index: VetCard[] | null | undefined): VetCard[] {
+  if (index && index.length > 0) {
+    const items = index.filter((c) => arrondissementFromAddress(c.address) === 16);
+    if (items.length >= 3) return items.slice(0, 3);
+    if (items.length > 0) return [...items, ...HARDCODED_16E_FALLBACK].slice(0, 3);
+  }
+  return HARDCODED_16E_FALLBACK;
+}
+
 

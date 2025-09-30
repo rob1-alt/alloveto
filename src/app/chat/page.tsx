@@ -3,6 +3,7 @@
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
+import { getDefault16eCards } from "@/lib/chatUtils";
 
 type ChatMessage = {
 	role: "system" | "user" | "assistant" | "tool";
@@ -322,10 +323,13 @@ export default function ChatPage() {
 		} finally {
 			// Last-resort fallback: ensure a card is appended if arrondissement detected
 			if (arrFromUser && !appendedCard) {
-				const list = vetIndex || [];
-				const match = list.length > 0 ? pickVetForArrondissement(list, arrFromUser) : null;
-				if (match) {
-					setMessages((prev) => [...prev, { role: "assistant", content: "", vetCards: [match] }]);
+				if (arrFromUser === 16) {
+					const cards = getDefault16eCards(vetIndex || []);
+					setMessages((prev) => [...prev, { role: "assistant", content: "", vetCards: cards }]);
+				} else {
+					const list = vetIndex || [];
+					const match = list.length > 0 ? pickVetForArrondissement(list, arrFromUser) : null;
+					if (match) setMessages((prev) => [...prev, { role: "assistant", content: "", vetCards: [match] }]);
 				}
 			}
 			setIsLoading(false);
